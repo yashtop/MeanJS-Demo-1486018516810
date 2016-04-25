@@ -24,7 +24,7 @@ module.exports.loadModels = function loadModels() {
 };
 
 module.exports.init = function init(callback) {
-  mongoose.connect(function (db) {
+	mongoose.connect(function (db) {
     // Initialize express
     var app = express.init(db);
     if (callback) callback(app, db, config);

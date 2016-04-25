@@ -1,0 +1,28 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.employee._id ? 'Edit Employee' : 'New Employee'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.employeeForm" class="form-horizontal" ng-submit="vm.save(vm.form.employeeForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="employeeName">Employee Name</label>
+          <input name="employeeName" type="text" ng-model="vm.employee.name" id="employeeName" class="form-control" placeholder="Employee Name" required>
+          <div ng-messages="vm.form.employeeForm.employeeName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Employee Name is required.</p>
+          </div>
+        </div>
+        <!--<div class="form-group">
+          <label class="control-label" for="menu">Menu Content</label>
+          <textarea name="menu" data-ng-model="vm.vendor.menu" id="menu" class="form-control" cols="30" rows="10" placeholder="Menu Content"></textarea>
+        </div>-->
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.employee._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
