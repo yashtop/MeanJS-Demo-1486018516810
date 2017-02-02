@@ -45,5 +45,11 @@ module.exports = function (app) {
 
   app.route('/api/login').all(emppandaPolicy.isAllowed)
     .post(emppanda.loginUser); 
-    
+	
+  app.route('/api/addsapemployee')
+  .post(emppanda.addSAPEmployee)
+   app.route('/api/getsapemployee/:sapID')
+  .get(emppanda.getSAPEmployee)
+   app.route('/api/updatesapemployeetask/:sapID')
+  .post(emppanda.updateSAPEmployee) 
 };

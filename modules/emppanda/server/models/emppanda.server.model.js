@@ -96,6 +96,48 @@ var VendorSchema = new Schema({
   menu: [MenuItemSchema]
 });
 
+var EmpSAPSchema = new Schema({
+Image: String,
+Name: String,
+Designation: String,
+JoiningDate: String,
+EnterprizeID: String,
+EmployeeNumber: String,
+Project: {
+ProjectName: String,
+ProjectDescription: String,
+ProjectLocation: String,
+ProjectDUName: String,
+ProjectDULeadName: String,
+ProjectPOC: String,
+ProjectContactNumber: String,
+ProjectIcon: String
+},
+TaskList: [
+{
+task: String,
+status: String
+},
+{
+task: String,
+status: String
+},
+{
+task: String,
+status: String
+}
+],
+Trainings: [
+{
+Name: String,
+URL: String
+},
+{
+Name: String,
+URL: String
+}
+]
+});
 
 var OrderSchema = new Schema({
   ordernumber: {type: Number},
@@ -128,3 +170,4 @@ OrderSchema.pre('save', function(next) {
 var Employee = mongoose.model('Employee', EmployeeSchema);
 var Vendor  = mongoose.model('Vendor', VendorSchema);
 var Order = mongoose.model('Order', OrderSchema);
+var EmpSAP = mongoose.model('EmpSAP', EmpSAPSchema);

@@ -8,6 +8,7 @@ var path = require('path'),
   Order = mongoose.model('Order'),
   Vendor = mongoose.model('Vendor'),
   Employee = mongoose.model('Employee'),
+  EmpSAP = mongoose.model('EmpSAP'),
   http = require('http'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
   
@@ -140,6 +141,43 @@ exports.deleteVendors = function (req, res) {
   Vendor.remove({role:'Vendor'}).exec();
 };
 
+
+
+exports.addSAPEmployee = function (req, res) {
+	var employee = new EmpSAP(req.body);
+	employee.save(function (err) {
+	if (err) {
+	  return res.status(400).send({
+		message: errorHandler.getErrorMessage(err)
+	  });
+	} else {
+	  res.json(employee);
+	}
+	});
+};
+exports.getSAPEmployee = function (req, res) {
+	console.log(req.params.sapID)
+	EmpSAP.find({'EmployeeNumber': req.params.sapID}).exec(function (err, employees) {
+		if (err) {     
+	       return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+		 res.json(employees);
+	}
+	})
+}
+exports.updateSAPEmployee = function (req, res) {
+	EmpSAP.update({'EmployeeNumber': req.params.sapID}, { $set: { "TaskList": req.body.TaskList}}, function (err, order) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(req.body.TaskList);
+	}
+})
+}
   /**
  * Add New Employee
  */
